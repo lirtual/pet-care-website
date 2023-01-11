@@ -2,9 +2,25 @@
 
 const header = document.querySelector('.header');
 const nav = document.querySelector('.nav');
+const navItems = document.querySelectorAll('.nav__item');
 const navLinks = document.querySelector('.nav__links');
 const navHeight = header.getBoundingClientRect().height;
 const allSections = document.querySelectorAll('.section');
+const images = document.querySelectorAll('img[data-src]');
+const btnHeader = document.querySelector('.btn--header');
+const section1 = document.querySelector('#section--1');
+const navLogo = document.querySelector('.nav__logo');
+const btnScrollUp = document.querySelector('.btn--scroll');
+const modalForm = document.querySelector('.modal__form');
+const modalContact = document.querySelector('.modal__contact');
+const btnCloseModal = document.querySelectorAll('.btn--close-modal');
+const btnOpenModalForm = document.querySelectorAll('.btn--show-modal');
+const btnOpenModalContact = document.querySelector('.btn--show-modal-contact');
+const overlays = document.querySelectorAll('.overlay');
+const hidden = document.querySelector('.hidden');
+const tabs = document.querySelectorAll('.values__tab');
+const tabsContent = document.querySelectorAll('.values__content');
+const tabsContainer = document.querySelector('.values__tab-container');
 
 // Page Navigation / Scrolling (Button) / Sticky Navigation
 
@@ -34,6 +50,26 @@ const headerObserver = new IntersectionObserver(stickyNavigation, {
 
 headerObserver.observe(header);
 
+btnHeader.addEventListener('click', e => {
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+navLogo.addEventListener('click', e => {
+  header.scrollIntoView({ behavior: 'smooth' });
+});
+
+window.addEventListener('scroll', () => {
+  if (document.documentElement.scrollTop > 200) {
+    btnScrollUp.style.display = 'block';
+  } else {
+    btnScrollUp.style.display = 'none';
+  }
+});
+
+btnScrollUp.addEventListener('click', e => {
+  header.scrollIntoView({ behavior: 'smooth' });
+});
+
 // Reveal Sections
 
 const revalSections = (entries, observer) => {
@@ -53,18 +89,112 @@ const sectionObserver = new IntersectionObserver(revalSections, {
 
 allSections.forEach(section => {
   sectionObserver.observe(section);
+  section.classList.add('section--hidden');
 });
 
 // Lazy loading images
 
-// Menu fade animation
+const lazyLoading = (entries, observer) => {
+  const [entry] = entries;
+  const img = entry.target;
+
+  if (entry.isIntersecting) {
+    img.src = img.dataset.src;
+    img.classList.remove('lazy-img');
+    observer.unobserve(img);
+  }
+};
+
+const imgObserver = new IntersectionObserver(lazyLoading, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+images.forEach(img => imgObserver.observe(img));
+
+// Menu
+
+navLinks.addEventListener('click', e => {
+  const current = document.querySelector('.current');
+  current.classList.remove('current');
+  e.target.parentNode.classList.add('current');
+});
 
 // Cookies
 
+const cookies = document.createElement('div');
+cookies.classList.add('cookie-message');
+cookies.innerHTML =
+  'This website collects cookies to deliver better user experience. <button class="btn btn--close-cookie">OK!</button>';
+header.append(cookies);
+
+document.querySelector('.btn--close-cookie').addEventListener('click', () => {
+  cookies.remove();
+});
+
 // Modal Window
+
+const openModal = target => {
+  target.classList.remove('hidden');
+  overlays.forEach(o => o.classList.remove('hidden'));
+};
+
+const closeModal = target => {
+  target.classList.add('hidden');
+  overlays.forEach(o => o.classList.add('hidden'));
+};
+
+btnOpenModalForm.forEach(btn =>
+  btn.addEventListener('click', () => {
+    openModal(modalForm);
+  })
+);
+
+btnOpenModalContact.addEventListener('click', () => {
+  openModal(modalContact);
+});
+
+btnCloseModal.forEach(btn =>
+  btn.addEventListener('click', () => {
+    closeModal(modalForm);
+    closeModal(modalContact);
+  })
+);
+
+overlays.forEach(o =>
+  o.addEventListener('click', () => {
+    closeModal(modalForm);
+    closeModal(modalContact);
+  })
+);
 
 // Tabbed component
 
-// SLider
+tabsContainer.addEventListener('click', e => {
+  const clickedTab = e.target.closest('.values__tab');
+
+  if (clickedTab) {
+    tabs.forEach(tab => tab.classList.remove('values__tab--active'));
+    tabsContent.forEach(tabContent =>
+      tabContent.classList.remove('values__content--active')
+    );
+
+    clickedTab.classList.add('values__tab--active');
+
+    document
+      .querySelector(`.values__content--${clickedTab.dataset.tab}`)
+      .classList.add('values__content--active');
+  }
+});
+
+// Slider
+
+const slides = document.querySelectorAll('.slide');
+const btnRight = document.querySelector('.slider__btn--right');
+const btnLeft = document.querySelector('.slider__btn--left');
+const dotsDiv = document.querySelector('.dots');
 
 // Event Handlers
+
+// Zmienić wyświetlanie sekcji i stopka

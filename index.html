@@ -58,7 +58,7 @@
     </div>
   </header>
 
-  <section class="section section--hidden" id="section--1">
+  <section class="section" id="section--1">
     <div class="section__title">
       <h2 class="section__desription">Our Services</h2>
       <h3 class="section__header">Where pet care is personal</h3>
@@ -132,7 +132,7 @@
     </div>
   </section>
 
-  <section class="section section--hidden" id="section--2">
+  <section class="section" id="section--2">
     <div class="section__title">
       <h2 class="section__desription">Our Values</h2>
       <h3 class="section__header">Your pet’s well-being is our goal.</h3>
@@ -206,7 +206,7 @@
 
   </section>
 
-  <section class="section section--hidden" id="section--3">
+  <section class="section" id="section--3">
     <div class="section__title">
       <h2 class="section__desription">Products</h2>
       <h3 class="section__header">Reliable healthy food for your pet</h3>
@@ -222,8 +222,8 @@
             <h3 class="product__name">Dog Snacks</h3>
             <p class="price">$2.29</p>
           </div>
-          <button class="btn btn--product"><img src="images/icon-shop.svg" alt="shopping cart icon" class="shop"
-              title="Buy Now!"></button>
+          <button class="btn btn--product btn--show-modal'"><img src="images/icon-shop.svg" alt="shopping cart icon"
+              class="shop" title="Buy Now!"></button>
         </div>
       </div>
 
@@ -236,8 +236,8 @@
             <h3 class="product__name">Wet Food</h3>
             <p class="price">$11.99</p>
           </div>
-          <button class="btn btn--product"><img src="images/icon-shop.svg" alt="shopping cart icon" class="shop"
-              title="Buy Now!"></button>
+          <button class="btn btn--product btn--show-modal"><img src="images/icon-shop.svg" alt="shopping cart icon"
+              class="shop" title="Buy Now!"></button>
         </div>
       </div>
 
@@ -250,8 +250,8 @@
             <h3 class="product__name">Meat</h3>
             <p class="price">$20.50</p>
           </div>
-          <button class="btn btn--product"><img src="images/icon-shop.svg" alt="shopping cart icon" class="shop"
-              title="Buy Now!"></button>
+          <button class="btn btn--product btn--show-modal"><img src="images/icon-shop.svg" alt="shopping cart icon"
+              class="shop" title="Buy Now!"></button>
         </div>
       </div>
 
@@ -264,15 +264,15 @@
             <h3 class="product__name">Bone</h3>
             <p class="price">$8.99</p>
           </div>
-          <button class="btn btn--product"><img src="images/icon-shop.svg" alt="shopping cart icon" class="shop"
-              title="Buy Now!"></button>
+          <button class="btn btn--product btn--show-modal"><img src="images/icon-shop.svg" alt="shopping cart icon"
+              class="shop" title="Buy Now!"></button>
         </div>
       </div>
     </div>
 
   </section>
 
-  <section class="section section--hidden" id="section--4">
+  <section class="section" id="section--4">
     <div class="section__title section__title--testimonials">
       <h2 class="section__desription">Testimonials</h2>
       <h3 class="section__header">What our clients are saying
@@ -334,13 +334,13 @@
 
   </section>
 
-  <section class="section section--contact section--hidden" id="section--5">
+  <section class="section section--contact " id="section--5">
     <div class="section__title">
       <h3 class="section__header">
         To find out more about what we do and how we can help
       </h3>
     </div>
-    <button class="btn btn--show-modal">Contact us</button>
+    <button class="btn btn--show-modal-contact">Contact us</button>
   </section>
 
   <footer class="footer">
@@ -370,7 +370,7 @@
     </p>
   </footer>
 
-  <div class="modal modal__form hidden--form">
+  <div class="modal modal__form hidden">
     <button class="btn--close-modal">&times;</button>
     <div class="modal__wrap--form">
       <div class="modal__login">
@@ -395,7 +395,7 @@
     </div>
   </div>
 
-  <div class="modal modal__contact hidden--contact">
+  <div class="modal modal__contact hidden">
     <button class="btn--close-modal">&times;</button>
     <div class="modal__wrap--contact">
       <h2 class="modal__header modal__header--contact"><span class="highlight">Contact Us</h2>
@@ -406,8 +406,9 @@
     </div>
   </div>
 
-  <div class="overlay hidden--form"></div>
-  <div class="overlay hidden--contact"></div>
+  <div class="overlay hidden"></div>
+
+  <button class="btn btn--scroll"><i class="fa-solid fa-arrow-up"></i></button>
 
 </body>
 
