@@ -1,5 +1,9 @@
 'use strict';
 
+window.onbeforeunload = () => {
+  window.scrollTo(0, 0);
+};
+
 const header = document.querySelector('.header');
 const nav = document.querySelector('.nav');
 const navItems = document.querySelectorAll('.nav__item');
@@ -21,14 +25,27 @@ const hidden = document.querySelector('.hidden');
 const tabs = document.querySelectorAll('.values__tab');
 const tabsContent = document.querySelectorAll('.values__content');
 const tabsContainer = document.querySelector('.values__tab-container');
+const slides = document.querySelectorAll('.slide');
+const btnRight = document.querySelector('.slider__btn--right');
+const btnLeft = document.querySelector('.slider__btn--left');
+const footerLinks = document.querySelector('.footer__nav');
 
 // Page Navigation / Scrolling (Button) / Sticky Navigation
 
 //Event delegation
 navLinks.addEventListener('click', e => {
   e.preventDefault();
-
   if (e.target.classList.contains('nav__link')) {
+    const linkId = e.target.getAttribute('href');
+    document.querySelector(linkId).scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
+});
+
+footerLinks.addEventListener('click', e => {
+  e.preventDefault();
+  if (e.target.classList.contains('footer__link')) {
     const linkId = e.target.getAttribute('href');
     document.querySelector(linkId).scrollIntoView({
       behavior: 'smooth',
@@ -190,11 +207,32 @@ tabsContainer.addEventListener('click', e => {
 
 // Slider
 
-const slides = document.querySelectorAll('.slide');
-const btnRight = document.querySelector('.slider__btn--right');
-const btnLeft = document.querySelector('.slider__btn--left');
-const dotsDiv = document.querySelector('.dots');
+let currentSlide = 0;
+const maxSlide = slides.length - 1;
 
-// Event Handlers
+const switchSlide = slide => {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
 
-// Zmienić wyświetlanie sekcji i stopka
+switchSlide(0);
+
+const next = () => {
+  if (currentSlide === maxSlide) {
+    currentSlide = 0;
+  } else currentSlide++;
+
+  switchSlide(currentSlide);
+};
+
+const prev = () => {
+  if (currentSlide === 0) {
+    currentSlide = maxSlide;
+  } else currentSlide--;
+
+  switchSlide(currentSlide);
+};
+
+btnRight.addEventListener('click', next);
+btnLeft.addEventListener('click', prev);
