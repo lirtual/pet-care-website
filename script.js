@@ -29,8 +29,29 @@ const slides = document.querySelectorAll('.slide');
 const btnRight = document.querySelector('.slider__btn--right');
 const btnLeft = document.querySelector('.slider__btn--left');
 const footerLinks = document.querySelector('.footer__nav');
+const openNav = document.querySelector('.nav__mobile--open');
+const closeNav = document.querySelector('.nav__mobile--close');
+const navMobile = document.querySelector('.nav__mobile');
 
 // Page Navigation / Scrolling (Button) / Sticky Navigation
+
+/* Navigation - mobile */
+
+function activeNav() {
+  navMobile.classList.toggle('nav__mobile--active');
+}
+
+openNav.addEventListener('click', () => {
+  activeNav();
+  closeNav.style.display = 'block';
+  openNav.style.display = 'none';
+});
+
+closeNav.addEventListener('click', () => {
+  activeNav();
+  openNav.style.display = 'block';
+  closeNav.style.display = 'none';
+});
 
 //Event delegation
 navLinks.addEventListener('click', e => {
