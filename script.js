@@ -89,6 +89,7 @@ footerLinks.addEventListener('click', e => {
   }
 });
 
+// Sticky navigation
 const stickyNavigation = entries => {
   const [entry] = entries; // same as entries[0]
   if (!entry.isIntersecting) nav.classList.add('sticky');
@@ -103,14 +104,17 @@ const headerObserver = new IntersectionObserver(stickyNavigation, {
 
 headerObserver.observe(header);
 
+// Button scroll
 btnHeader.addEventListener('click', e => {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
+// Logo scroll
 navLogo.addEventListener('click', e => {
   header.scrollIntoView({ behavior: 'smooth' });
 });
 
+// Mobile view  page navigatioin
 window.addEventListener('scroll', () => {
   if (navMobile.classList.contains('nav__mobile--active')) {
     btnScrollUp.style.display = 'none';
@@ -123,8 +127,21 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// Menu - link accent
+
+navLinks.addEventListener('click', e => {
+  const current = document.querySelector('.current');
+  current.classList.remove('current');
+  e.target.parentNode.classList.add('current');
+});
+
+// Button - scroll up
+
 btnScrollUp.addEventListener('click', e => {
   header.scrollIntoView({ behavior: 'smooth' });
+  const current = document.querySelector('.current');
+  current.classList.remove('current');
+  e.target.parentNode.classList.add('current');
 });
 
 // Reveal Sections
@@ -169,14 +186,6 @@ const imgObserver = new IntersectionObserver(lazyLoading, {
 });
 
 images.forEach(img => imgObserver.observe(img));
-
-// Menu
-
-navLinks.addEventListener('click', e => {
-  const current = document.querySelector('.current');
-  current.classList.remove('current');
-  e.target.parentNode.classList.add('current');
-});
 
 // Cookies
 
