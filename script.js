@@ -187,18 +187,6 @@ const imgObserver = new IntersectionObserver(lazyLoading, {
 
 images.forEach(img => imgObserver.observe(img));
 
-// Cookies
-
-const cookies = document.createElement('div');
-cookies.classList.add('cookie-message');
-cookies.innerHTML =
-  'This website collects cookies to deliver better user experience. <button class="btn btn--close-cookie">OK!</button>';
-header.append(cookies);
-
-document.querySelector('.btn--close-cookie').addEventListener('click', () => {
-  cookies.remove();
-});
-
 // Modal Window
 
 const openModal = target => {
